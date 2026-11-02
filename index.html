@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veterinaria Patitas (demo) · Turnos online</title>
+  <meta name="description" content="Landing de ejemplo para una veterinaria ficticia: servicios, preguntas frecuentes y pedido de turnos conectado a Google Sheets." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="demo-bar">Sitio de demostración · negocio ficticio</div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="logo" href="#inicio">🐾 Patitas</a>
+      <nav aria-label="Principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#preguntas">Preguntas</a>
+        <a class="btn btn-small" href="#turno">Pedir turno</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <p class="eyebrow">Veterinaria de barrio · Atención con turno</p>
+          <h1>Cuidamos a tu mascota como si fuera nuestra</h1>
+          <p class="lead">Consultas, vacunas, baño y peluquería. Pedí tu turno online en menos de un minuto y te confirmamos por WhatsApp o email.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#turno">Pedir turno</a>
+            <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+          </div>
+          <ul class="hero-facts">
+            <li><strong>Lun a sáb</strong><span>9 a 20 h</span></li>
+            <li><strong>Urgencias</strong><span>Atención prioritaria</span></li>
+            <li><strong>Pagos</strong><span>Efectivo, débito y transferencia</span></li>
+          </ul>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="bubble b1">🐶</div>
+          <div class="bubble b2">🐱</div>
+          <div class="bubble b3">🐰</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="section">
+      <div class="wrap">
+        <h2>Servicios</h2>
+        <p class="section-lead">Todo lo que tu mascota necesita, en un solo lugar.</p>
+        <div class="cards">
+          <article class="card"><div class="icon">🩺</div><h3>Consulta clínica</h3><p>Controles generales, diagnóstico y seguimiento.</p></article>
+          <article class="card"><div class="icon">💉</div><h3>Vacunación</h3><p>Plan de vacunas para cachorros y adultos, con libreta al día.</p></article>
+          <article class="card"><div class="icon">🛁</div><h3>Baño y peluquería</h3><p>Corte, baño, limpieza de oídos y corte de uñas.</p></article>
+          <article class="card"><div class="icon">🦷</div><h3>Odontología</h3><p>Limpieza dental y control de encías.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="turno" class="section section-alt">
+      <div class="wrap turno-grid">
+        <div>
+          <h2>Pedí tu turno</h2>
+          <p class="section-lead">Completá el formulario y te contactamos para confirmar día y horario.</p>
+          <ul class="checks">
+            <li>Respondemos en menos de 2 horas en horario de atención.</li>
+            <li>Si es una urgencia, indicalo en el mensaje.</li>
+            <li>Tus datos se usan solo para coordinar el turno.</li>
+          </ul>
+        </div>
+
+        <form id="form-turno" class="form" novalidate>
+          <div class="field">
+            <label for="nombre">Tu nombre</label>
+            <input id="nombre" name="nombre" autocomplete="name" required />
+            <p class="error" id="error-nombre"></p>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="telefono">Teléfono / WhatsApp</label>
+              <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" />
+              <p class="error" id="error-telefono"></p>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" />
+              <p class="error" id="error-email"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="mascota">Nombre de tu mascota</label>
+              <input id="mascota" name="mascota" required />
+              <p class="error" id="error-mascota"></p>
+            </div>
+            <div class="field">
+              <label for="servicio">Servicio</label>
+              <select id="servicio" name="servicio" required>
+                <option value="">Elegí una opción</option>
+                <option>Consulta clínica</option>
+                <option>Vacunación</option>
+                <option>Baño y peluquería</option>
+                <option>Odontología</option>
+                <option>Urgencia</option>
+              </select>
+              <p class="error" id="error-servicio"></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="mensaje">Mensaje (opcional)</label>
+            <textarea id="mensaje" name="mensaje" rows="3" maxlength="1000" placeholder="Contanos qué necesita tu mascota o qué días te quedan cómodos."></textarea>
+          </div>
+          <!-- Campo trampa para bots: las personas no lo ven -->
+          <div class="hp" aria-hidden="true">
+            <label for="sitio_web">No completar</label>
+            <input id="sitio_web" name="sitio_web" tabindex="-1" autocomplete="off" />
+          </div>
+          <label class="consent">
+            <input type="checkbox" id="acepto" name="acepto" required />
+            <span>Acepto que me contacten para coordinar el turno.</span>
+          </label>
+          <p class="error" id="error-acepto"></p>
+          <button class="btn btn-block" type="submit" id="enviar">Pedir turno</button>
+          <div id="estado" class="estado" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="preguntas" class="section">
+      <div class="wrap narrow">
+        <h2>Preguntas frecuentes</h2>
+        <details><summary>¿Atienden sin turno?</summary><p>Atendemos con turno para evitar esperas. Las urgencias tienen prioridad: avisanos en el formulario o llamanos.</p></details>
+        <details><summary>¿Qué tengo que llevar a la primera consulta?</summary><p>La libreta sanitaria si la tenés, y estudios previos si los hay.</p></details>
+        <details><summary>¿Cuánto dura el baño y peluquería?</summary><p>Entre 1 y 2 horas según el tamaño y el tipo de pelo. Te avisamos cuando está lista.</p></details>
+        <details><summary>¿Qué medios de pago aceptan?</summary><p>Efectivo, tarjeta de débito y transferencia.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>Veterinaria Patitas</strong> · negocio ficticio creado como proyecto demo.</p>
+      <p class="muted">Diseño y desarrollo: DH1 Software.</p>
+    </div>
+  </footer>
+</body>
+</html>
